@@ -1,27 +1,22 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { AppNavigation } from '@navigation/navigator';
+import { PersistGate } from 'redux-persist/integration/react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Stack = createNativeStackNavigator();
+import { persistor, store } from '@redux/store';
 
-function HomeScreen(props) {
-  console.log(props);
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
+// import { store } from '@redux/store';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <AppNavigation />
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 };
 
