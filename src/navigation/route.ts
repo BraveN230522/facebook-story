@@ -1,2 +1,5 @@
-// HOME TAB
-export const HOME_SCREEN = 'HomeScreen';
+// HOME
+export const HOME_SCREEN = 'HOME_SCREEN';
+
+// CREATE STORY
+export const CREATE_STORY_SCREEN = 'CREATE_STORY_SCREEN';

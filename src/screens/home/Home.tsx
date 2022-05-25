@@ -1,30 +1,31 @@
-import React from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/AntDesign';
+import React from 'react';
 
-import useLogic from './Home.logic';
+import { Button } from '@components/button';
 import { styles } from './Home.style';
+import useLogic from './Home.logic';
 
 export const Home = (props: any) => {
-  const { handleDispatch } = useLogic(props);
+  const { handleCreateStory } = useLogic(props);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.box} onPress={handleDispatch}>
+      <Button style={styles.box} onPress={handleCreateStory}>
         <Image
           style={styles.image}
           source={{ uri: 'https://source.unsplash.com/random' }}
           resizeMode="cover"
         />
         <View style={styles.textBox}>
-          <View>
-            <Icon name="plus" size={30} color="#900" />
+          <View style={styles.plusWrap}>
+            <Icon size={20} color="white" name="plus" />
           </View>
           <View style={styles.wrapText}>
-            <Text style={styles.text}>Create Story</Text>
+            <Text style={styles.text}>Create story</Text>
           </View>
         </View>
-      </TouchableOpacity>
+      </Button>
     </View>
   );
 };

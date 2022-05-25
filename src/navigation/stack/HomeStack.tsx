@@ -11,9 +11,9 @@ export const HomeStack = (
     <Stack.Screen
       name={HOME_SCREEN}
       component={Home}
-      // options={{
-      //   header: () => <Header right={<></>} />,
-      // }}
+      options={{
+        header: () => <></>,
+      }}
     />
   </Stack.Group>
 );

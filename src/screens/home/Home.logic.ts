@@ -1,14 +1,10 @@
-import { setMobile } from '@redux/slices';
-import { useAppDispatch, useAppSelector } from '@redux/store';
+import { CREATE_STORY_SCREEN } from '@navigation/route';
 
 const useLogic = (props: any) => {
-  const dispatch = useAppDispatch();
-  const mobile = useAppSelector(state => state.home.mobile);
-
-  const handleDispatch = () => {
-    dispatch(setMobile(!mobile));
+  const handleCreateStory = () => {
+    props.navigation.navigate(CREATE_STORY_SCREEN);
   };
-  return { handleDispatch };
+  return { handleCreateStory };
 };
 
 export default useLogic;

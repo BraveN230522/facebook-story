@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { Spacing } from '../../theme/size';
 
 export const styles = StyleSheet.create({
   container: {
