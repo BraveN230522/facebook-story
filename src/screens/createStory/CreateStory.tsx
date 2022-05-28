@@ -61,7 +61,7 @@ export const CreateStory = (props: any) => {
         horizontal
         style={styles.flatList}
         data={tickets}
-        ListHeaderComponent={}
+        // ListHeaderComponent={}
         renderItem={({ item, index }) => (
           <StoryTicket
             IconTicket={item.IconTicket}

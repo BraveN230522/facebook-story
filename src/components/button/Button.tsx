@@ -9,7 +9,7 @@ import { styles } from './Button.style';
 interface IProps {
   children: React.ReactNode;
   onPress: () => void;
-  style: ViewStyle | ViewStyle[];
+  style?: ViewStyle | ViewStyle[];
 }
 
 export const Button = (props: IProps) => {

@@ -10,11 +10,18 @@ interface IProps {
   LeftComponent: () => ReactElement;
   RightComponent: () => ReactElement;
   CenterComponent: () => ReactElement;
-  onLeftPress: () => void;
+  onLeftPress?: () => void;
+  onRightPress?: () => void;
 }
 
 export const Header = (props: IProps) => {
-  const { LeftComponent, RightComponent, CenterComponent, onLeftPress } = props;
+  const {
+    LeftComponent,
+    RightComponent,
+    CenterComponent,
+    onLeftPress,
+    onRightPress = () => {},
+  } = props;
   const { handleLeftPress } = useLogic(props);
 
   const Left = () => {
@@ -33,11 +40,13 @@ export const Header = (props: IProps) => {
 
   return (
     <View style={styles.container}>
-      <Button onPress={handleLeftPress}>
+      <Button onPress={onLeftPress || handleLeftPress}>
         <Left />
       </Button>
       <Center />
-      <Right />
+      <Button onPress={onRightPress}>
+        <Right />
+      </Button>
     </View>
   );
 };

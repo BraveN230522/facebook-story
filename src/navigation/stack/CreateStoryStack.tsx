@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { CREATE_STORY_SCREEN } from '@navigation/route';
 import { CreateStory } from '@screens/createStory';
 import { Header } from '@components/header';
+import { Text } from 'react-native';
+import { Colors } from '@theme';
 
 const Stack = createStackNavigator();
 
@@ -19,11 +21,20 @@ export const CreateStoryStack = (
       options={{
         header: () => (
           <Header
-            LeftComponent={() => <Icon size={20} color="white" name="close" />}
+            LeftComponent={() => <Icon size={24} color="white" name="close" />}
             CenterComponent={() => (
-              <Icon size={20} color="white" name="close" />
+              <Text
+                style={{
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: '700',
+                }}>
+                Create Story
+              </Text>
             )}
-            RightComponent={() => <Icon size={20} color="white" name="close" />}
+            RightComponent={() => (
+              <Icon size={24} color="white" name="setting" />
+            )}
           />
         ),
       }}

@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { Spacing } from '../../theme/size';
 
+import { Colors } from '@theme';
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -11,7 +13,7 @@ export const styles = StyleSheet.create({
     width: 150,
     height: 250,
     borderRadius: 20,
-    backgroundColor: '#3a3b3c',
+    backgroundColor: Colors.primary,
   },
   image: {
     borderTopLeftRadius: 20,
@@ -37,11 +39,11 @@ export const styles = StyleSheet.create({
   plusWrap: {
     position: 'absolute',
     top: -15,
-    borderColor: '#3a3b3c',
+    borderColor: Colors.primary,
     borderWidth: 2,
     width: 30,
     height: 30,
-    backgroundColor: '#1877f2',
+    backgroundColor: Colors.blue,
     borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
