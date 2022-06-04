@@ -8,5 +8,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.primary,
   },
-  flatList: {},
+  tickets: {
+    flex: 1,
+    backgroundColor: Colors.blue,
+  },
 });
