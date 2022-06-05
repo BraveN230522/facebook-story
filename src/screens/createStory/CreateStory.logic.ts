@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { setMobile } from '@redux/slices';
 import { useAppDispatch, useAppSelector } from '@redux/store';
-import { hasAndroidPermission } from '@utils/helper';
+import { hasAndroidPhotoPermission } from '@utils/helper';
 import { Platform } from 'react-native';
 import CameraRoll, {
   GetPhotosParams,
@@ -10,15 +10,17 @@ import CameraRoll, {
 
 const useLogic = (props: any) => {
   const dispatch = useAppDispatch();
-  const mobile = useAppSelector(state => state.home.mobile);
   const [photos, setPhotos] = useState<CameraRoll.PhotoIdentifier[]>([]);
+  useEffect(() => {
+    getPhotos();
+  }, []);
 
   const getPhotos = async () => {
-    if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
+    if (Platform.OS === 'android' && !(await hasAndroidPhotoPermission())) {
       return;
     }
     const fetchParams: GetPhotosParams = {
-      first: 5,
+      first: 11,
       assetType: 'Photos',
     };
 
@@ -31,10 +33,7 @@ const useLogic = (props: any) => {
       });
   };
 
-  const handleDispatch = () => {
-    dispatch(setMobile(!mobile));
-  };
-  return { handleDispatch };
+  return { getPhotos, photos };
 };
 
 export default useLogic;

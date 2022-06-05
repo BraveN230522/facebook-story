@@ -8,18 +8,17 @@ import {
   FlatList,
   ScrollView,
   Platform,
+  Dimensions,
 } from 'react-native';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import CameraRoll, {
-  GetPhotosParams,
-} from '@react-native-community/cameraroll';
+import IconEntypo from 'react-native-vector-icons/Entypo';
 
 import { StoryTicket } from './components';
 import useLogic from './CreateStory.logic';
 import { styles } from './CreateStory.style';
-import { hasAndroidPermission } from '@utils/helper';
+import { Device } from '@theme';
 
 const tickets = [
   {
@@ -65,57 +64,65 @@ const tickets = [
 ];
 
 export const CreateStory = (props: any) => {
-  const { handleDispatch } = useLogic(props);
+  const { getPhotos, photos } = useLogic(props);
   return (
     <View style={styles.container}>
-      <ScrollView horizontal style={styles.tickets}>
-        {tickets.map((ticket, index) => {
-          return (
-            <StoryTicket
-              key={ticket.title}
-              IconTicket={ticket.IconTicket}
-              title={ticket.title}
-              topColor={ticket.topColor}
-              bottomColor={ticket.bottomColor}
-              isFirst={index === 0}
-              isLast={index === tickets.length - 1}
-            />
-          );
-        })}
+      <ScrollView stickyHeaderIndices={[1]}>
+        <View style={{ height: 160 }}>
+          <ScrollView showsHorizontalScrollIndicator={false} horizontal>
+            {tickets.map((ticket, index) => {
+              return (
+                <StoryTicket
+                  key={ticket.title}
+                  IconTicket={ticket.IconTicket}
+                  title={ticket.title}
+                  topColor={ticket.topColor}
+                  bottomColor={ticket.bottomColor}
+                  isFirst={index === 0}
+                  isLast={index === tickets.length - 1}
+                />
+              );
+            })}
+          </ScrollView>
+        </View>
+        <View style={styles.wrap}>
+          <View style={styles.photoOptions}>
+            <View style={styles.cameraRoll}>
+              <Text style={styles.cameraRollText}>Camera Roll</Text>
+              <IconEntypo
+                size={20}
+                color={Colors.gray}
+                name="chevron-small-down"
+              />
+            </View>
+            <View style={styles.multiple}>
+              <IconIonicons
+                size={20}
+                color={Colors.gray}
+                name="ios-images-outline"
+              />
+              <Text style={styles.multipleText}>Select multiple</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.photos}>
+          {photos.map((item, index) => {
+            return (
+              <Image
+                key={item.node.image.uri}
+                style={{
+                  width: Device.width / 3 - 4 / 3,
+                  marginRight: (index + 1) % 3 === 0 ? 0 : 2,
+                  marginTop: 2,
+                  height: 200,
+                  backgroundColor: Colors.primary,
+                }}
+                source={{ uri: item.node.image.uri }}
+              />
+            );
+          })}
+        </View>
       </ScrollView>
-      <ScrollView horizontal style={styles.tickets}>
-        {photos.map(photo => {
-          console.log(photo.node);
-
-          return (
-            <Image
-              style={{ width: 300, height: 300, backgroundColor: 'red' }}
-              source={{ uri: photo.node.image.uri }}
-            />
-          );
-        })}
-      </ScrollView>
-      <TouchableOpacity
-        onPress={getPhotos}
-        style={{ backgroundColor: 'lime', padding: 30 }}>
-        <Text>getPhotos</Text>
-      </TouchableOpacity>
-      {/* <FlatList
-        
-        data={tickets}
-        // ListHeaderComponent={}
-        renderItem={({ item, index }) => (
-          <StoryTicket
-            IconTicket={item.IconTicket}
-            title={item.title}
-            topColor={item.topColor}
-            bottomColor={item.bottomColor}
-            isFirst={index === 0}
-            isLast={index === tickets.length - 1}
-          />
-        )}
-        keyExtractor={(item, index) => String(index)}
-      /> */}
     </View>
   );
 };

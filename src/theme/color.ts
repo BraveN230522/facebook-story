@@ -11,6 +11,7 @@ enum Options {
   BLACK = 'black',
   RED = 'red',
   YELLOW = 'yellow',
+  GRAY = 'gray',
 }
 type ColorPalette = {
   [key in Options]: string;
@@ -29,6 +30,7 @@ export const Colors: ColorPalette = {
   black: '#000000',
   red: '#f65a6a',
   yellow: '#fdbf44',
+  gray: '#a3a4a6',
 };
 
 // export const DARK_THEME_COLOR_PALETTE: ColorPalette = {
