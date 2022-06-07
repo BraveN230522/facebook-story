@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 
-import { setMobile } from '@redux/slices';
-import { useAppDispatch, useAppSelector } from '@redux/store';
 import { hasAndroidPhotoPermission } from '@utils/helper';
-import { Platform } from 'react-native';
+import { NativeScrollEvent, Platform } from 'react-native';
 import CameraRoll, {
   GetPhotosParams,
 } from '@react-native-community/cameraroll';
 
 const useLogic = (props: any) => {
-  const dispatch = useAppDispatch();
   const [photos, setPhotos] = useState<CameraRoll.PhotoIdentifier[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [recall, setRecall] = useState<boolean>(false);
+
   useEffect(() => {
     getPhotos();
   }, []);
@@ -20,7 +20,7 @@ const useLogic = (props: any) => {
       return;
     }
     const fetchParams: GetPhotosParams = {
-      first: 11,
+      first: 20,
       assetType: 'Photos',
     };
 
@@ -33,7 +33,24 @@ const useLogic = (props: any) => {
       });
   };
 
-  return { getPhotos, photos };
+  const isCloseToBottom = ({
+    layoutMeasurement,
+    contentOffset,
+    contentSize,
+  }: NativeScrollEvent) => {
+    const paddingToBottom = 20;
+    return (
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom
+    );
+  };
+
+  const handleLoadMore = () => {
+    setPage(page + 1);
+    setRecall(false);
+  };
+
+  return { getPhotos, photos, isCloseToBottom, handleLoadMore };
 };
 
 export default useLogic;
