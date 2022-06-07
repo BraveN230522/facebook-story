@@ -64,10 +64,18 @@ const tickets = [
 ];
 
 export const CreateStory = (props: any) => {
-  const { getPhotos, photos } = useLogic(props);
+  const { getPhotos, photos, isCloseToBottom, handleLoadMore } =
+    useLogic(props);
   return (
     <View style={styles.container}>
-      <ScrollView stickyHeaderIndices={[1]}>
+      <ScrollView
+        stickyHeaderIndices={[1]}
+        onScroll={({ nativeEvent }) => {
+          if (isCloseToBottom(nativeEvent)) {
+            handleLoadMore();
+          }
+        }}
+        scrollEventThrottle={400}>
         <View style={{ height: 160 }}>
           <ScrollView showsHorizontalScrollIndicator={false} horizontal>
             {tickets.map((ticket, index) => {
