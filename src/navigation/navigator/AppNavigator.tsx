@@ -1,9 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { CreateStoryStack, HomeStack } from '..';
+import { BottomTabStack, CreateStoryStack, HomeStack } from '..';
 
 export const AppNavigation = () => {
   const Stack = createStackNavigator();
+  // return BottomTabStack;
   return (
     <Stack.Navigator>
       {HomeStack}
