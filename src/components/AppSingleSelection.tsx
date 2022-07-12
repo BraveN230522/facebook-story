@@ -10,18 +10,23 @@ import {
 import { ActiveRadioIcon, RadioIcon } from '@assets';
 import { Colors, FontSize, Spacing } from '@theme';
 
+/**
+ * - Data must be object and include ID and CONTENT
+ * - Selected must be ID
+ * - Selected is also default data
+ */
 export const AppSingleSelection = React.memo((props: any) => {
-  const { style, data = [], selected = {}, onSelect } = props;
+  const { style, data = [], selected, onSelect } = props;
 
   return (
     <View style={[styles.container, style]}>
       {data.map((item: any) => {
         return (
           <TouchableOpacity
-            onPress={() => onSelect(item)}
+            onPress={() => onSelect(item.id)}
             style={styles.radioBox}
             activeOpacity={0.7}>
-            {selected.id === item.id ? <ActiveRadioIcon /> : <RadioIcon />}
+            {selected === item.id ? <ActiveRadioIcon /> : <RadioIcon />}
             <Text style={styles.text}>{item.content}</Text>
           </TouchableOpacity>
         );

@@ -10,11 +10,15 @@ import {
 import { ActiveRadioIcon, RadioIcon } from '@assets';
 import { Colors, FontSize, Spacing } from '@theme';
 
+/**
+ * - Data must be object and include ID and CONTENT
+ * - Selected must be ID ARRAY
+ * - Selected is also default data
+ */
 export const AppMultipleSelection = React.memo((props: any) => {
   const { style, data = [], selected = [], onSelect } = props;
-  const [selectedData = [], setSelectedData] = useState<any>([]);
 
-  const dataRef = useRef<any>([]);
+  const dataRef = useRef<any>(selected);
 
   return (
     <View style={[styles.container, style]}>
@@ -22,15 +26,14 @@ export const AppMultipleSelection = React.memo((props: any) => {
         return (
           <TouchableOpacity
             onPress={() => {
-              console.log(selectedData);
-              // if (selectedData.includes(item.id))
-              //   setSelectedData((prev: any) => {
-              //     console.log(prev.filter((temp: any) => temp.id !== item.id));
+              if (dataRef.current.includes(item.id)) {
+                const filteredData = dataRef.current.filter((id: any) => {
+                  return id !== item.id;
+                });
+                dataRef.current = filteredData;
+              } else dataRef.current = [...dataRef.current, item.id];
 
-              //     return prev.filter((temp: any) => temp.id !== item.id);
-              //   });
-              // else setSelectedData((prev: any) => [...prev, item.id]);
-              // onSelect(selectedData);
+              onSelect(dataRef.current);
             }}
             style={styles.radioBox}
             activeOpacity={0.7}>

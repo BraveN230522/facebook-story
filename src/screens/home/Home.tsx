@@ -9,12 +9,14 @@ import useLogic from './Home.logic';
 import { EyeInactiveIcon, MailIcon, PadLockIcon } from '@assets';
 import { AppMultipleSelection } from '@components/AppMultipleSelection';
 import { AppAccordion } from '@components/AppAccordion';
+import { AppSingleSelection } from '@components/AppSingleSelection';
+import { AppDateTimePicker } from '@components/AppDateTimePicker';
+import { AppYesNo } from '@components/AppYesNo';
 
 export const Home = (props: any) => {
   const { handleCreateStory } = useLogic(props);
 
-  const [selectRadio, setSelectRadio] = useState([]);
-  console.log(selectRadio);
+  const [select, setSelect] = useState(1);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -47,7 +49,7 @@ export const Home = (props: any) => {
         label="Username"
         isRequired
       /> */}
-      <AppMultipleSelection
+      {/* <AppMultipleSelection
         selected={selectRadio}
         data={[
           {
@@ -72,7 +74,43 @@ export const Home = (props: any) => {
           },
         ]}
         onSelect={setSelectRadio}
-      />
+      /> */}
+      {/* <AppSingleSelection
+        selected={selectRadio}
+        data={[
+          {
+            id: 1,
+            content: 'Key necessary',
+          },
+          {
+            id: 2,
+            content: 'Advertisement unwanted',
+          },
+          {
+            id: 3,
+            content: 'House of main street',
+          },
+          {
+            id: 4,
+            content: 'Main drop off point within the house',
+          },
+          {
+            id: 5,
+            content: 'Further hinderings',
+          },
+        ]}
+        onSelect={setSelectRadio}
+      /> */}
+      {/* <AppDateTimePicker
+        onPickDate={date => {
+          console.log(date);
+        }}
+        errorText="loi roi"
+        title="Test package delivered intact?"
+        isRequired
+        mode="time"
+      /> */}
+      <AppYesNo onSelect={setSelect} selected={select} />
       {/* <AppAccordion /> */}
     </ScrollView>
   );
