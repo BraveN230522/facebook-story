@@ -166,3 +166,17 @@ export const CrossIcon = ({ style, iconFillColor, width, height }: any) => (
     />
   </Svg>
 );
+
+export const ChevronPickerIcon = ({
+  style,
+  iconFillColor,
+  width,
+  height,
+}: any) => (
+  <Svg width="9" height="6" viewBox="0 0 9 6" fill="none">
+    <Path
+      d="M8.57143 1.03571C8.57143 0.742745 8.32868 0.5 8.03571 0.5H0.535714C0.242746 0.5 0 0.742745 0 1.03571C0 1.17801 0.0585938 1.31194 0.15904 1.41239L3.90904 5.16239C4.00949 5.26283 4.14342 5.32143 4.28571 5.32143C4.42801 5.32143 4.56194 5.26283 4.66239 5.16239L8.41239 1.41239C8.51284 1.31194 8.57143 1.17801 8.57143 1.03571Z"
+      fill="#666666"
+    />
+  </Svg>
+);

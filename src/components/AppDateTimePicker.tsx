@@ -24,7 +24,7 @@ const slideDown = {
 
 interface IProps {
   value?: string;
-  errorText?: string | string[];
+  error?: string | string[];
   style?: ViewStyle | ViewStyle[];
   title?: string;
   onPickDate: (date: Date) => void;
@@ -37,7 +37,7 @@ interface IProps {
 export const AppDateTimePicker = (props: IProps) => {
   const {
     value,
-    errorText,
+    error,
     style,
     title,
     onPickDate,
@@ -76,7 +76,7 @@ export const AppDateTimePicker = (props: IProps) => {
           {value ? value : `Select ${mode}`}
         </Text>
       </TouchableOpacity>
-      {!!errorText && <Text style={styles.error}>{errorText}</Text>}
+      {!!error && <Text style={styles.error}>{error}</Text>}
       {visible && (
         <DateTimePickerModal
           maximumDate={maxDate}

@@ -35,13 +35,17 @@ export const AppInput = React.memo((props: any) => {
     <View style={[styles.container, style]}>
       {!!label && (
         <Text style={styles.label}>
-          {label} {isRequired && <Text style={styles.isRequired}>*</Text>}
+          {isRequired && <Text style={styles.isRequired}>*</Text>} {label}
         </Text>
       )}
       <View style={[styles.boxInput, boxStyle]}>
-        {PreIcon && <PreIcon />}
+        {PreIcon && (
+          <View style={{ marginLeft: 12 }}>
+            <PreIcon />
+          </View>
+        )}
         <TextInput
-          style={[styles.input, inputStyle]}
+          style={[styles.input, multiline ? styles.multiline : {}, inputStyle]}
           returnKeyType={returnKeyType || (multiline ? undefined : 'done')}
           keyboardType={keyboardType}
           secureTextEntry={secureTextEntry}
@@ -56,7 +60,11 @@ export const AppInput = React.memo((props: any) => {
           onBlur={handleBlur}
           allowFontScaling={false}
         />
-        {PostIcon && <PostIcon />}
+        {!!PostIcon && (
+          <View style={{ marginRight: 12 }}>
+            <PostIcon />
+          </View>
+        )}
       </View>
       {!!error && <Text style={styles.error}>{error}</Text>}
     </View>
@@ -75,7 +83,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
-    paddingHorizontal: 22,
+    paddingHorizontal: 2,
     minHeight: 50, //42
     borderRadius: 5,
   },
@@ -100,5 +108,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#DA202A',
     fontWeight: '400',
+  },
+  multiline: {
+    height: 120,
+    paddingBottom: 7,
+    fontSize: 15,
   },
 });

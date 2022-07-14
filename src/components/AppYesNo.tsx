@@ -15,10 +15,14 @@ import { Colors, FontSize, Spacing } from '@theme';
  * - Selected is also default data
  */
 export const AppYesNo = React.memo((props: any) => {
-  const { style, selected, onSelect } = props;
+  const { style, selected, onSelect, isRequired, title } = props;
 
   return (
     <View style={[styles.container, style]}>
+      <Text style={styles.textTitle}>
+        {isRequired && <Text style={styles.isRequired}>* </Text>}
+        {title}
+      </Text>
       <TouchableOpacity
         style={[styles.box, selected === 1 ? styles.active : {}]}
         onPress={() => onSelect(1)}>
@@ -26,7 +30,7 @@ export const AppYesNo = React.memo((props: any) => {
         <Text style={styles.text}>Yes</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={[styles.box, selected === 0 ? styles.active : {}]}
+        style={[styles.box, selected === 0 ? styles.active : {}, styles.mt16]}
         onPress={() => onSelect(0)}>
         <CrossIcon />
         <Text style={styles.text}>No</Text>
@@ -37,7 +41,6 @@ export const AppYesNo = React.memo((props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: Spacing.height18,
     width: '100%',
   },
   box: {
@@ -48,6 +51,14 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 4,
   },
+  textTitle: {
+    fontWeight: '700',
+    fontSize: 15,
+    marginBottom: 10,
+  },
+  isRequired: {
+    color: '#FF5757',
+  },
   active: {
     backgroundColor: '#D5D5D5',
   },
@@ -56,5 +67,8 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: '#666666',
     marginLeft: 10,
+  },
+  mt16: {
+    marginTop: 16,
   },
 });

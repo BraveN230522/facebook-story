@@ -12,6 +12,10 @@ import { AppAccordion } from '@components/AppAccordion';
 import { AppSingleSelection } from '@components/AppSingleSelection';
 import { AppDateTimePicker } from '@components/AppDateTimePicker';
 import { AppYesNo } from '@components/AppYesNo';
+import { AppPicker } from '@components/AppPicker';
+import { AppModal } from '@components/AppModal';
+import { Modal } from '@ui-kitten/components';
+import { AppButton } from '@components/AppButton';
 
 export const Home = (props: any) => {
   const { handleCreateStory } = useLogic(props);
@@ -36,21 +40,24 @@ export const Home = (props: any) => {
         </View>
       </Button> */}
       {/* <AppInput
-        placeholder="Email"
+        // placeholder="Email"
         // secureTextEntry
         onChangeText={(value: string) => {
           console.log(value);
         }}
         // value={values.password}
         // error={errors.password}
-        maxLength={100}
-        PreIcon={MailIcon}
+        // maxLength={100}
+        // PreIcon={MailIcon}
+        // PostIcon={MailIcon}
         error="sai email roi"
         label="Username"
         isRequired
+        multiline
+        // inputStyle={{ minHeight: '30%' }}
       /> */}
       {/* <AppMultipleSelection
-        selected={selectRadio}
+        selected={select}
         data={[
           {
             id: 1,
@@ -73,10 +80,13 @@ export const Home = (props: any) => {
             content: 'Further hinderings',
           },
         ]}
-        onSelect={setSelectRadio}
+        onSelect={setSelect}
+        title="day la title"
+        error="loi roi"
+        isRequired
       /> */}
       {/* <AppSingleSelection
-        selected={selectRadio}
+        selected={select}
         data={[
           {
             id: 1,
@@ -99,18 +109,56 @@ export const Home = (props: any) => {
             content: 'Further hinderings',
           },
         ]}
-        onSelect={setSelectRadio}
+        onSelect={setSelect}
+        title="day la title"
+        error="loi roi"
+        isRequired
       /> */}
       {/* <AppDateTimePicker
         onPickDate={date => {
           console.log(date);
         }}
-        errorText="loi roi"
+        error="loi roi"
         title="Test package delivered intact?"
         isRequired
         mode="time"
       /> */}
-      <AppYesNo onSelect={setSelect} selected={select} />
+      {/* <AppYesNo
+        onSelect={setSelect}
+        selected={select}
+        title="day la title"
+        isRequired
+      /> */}
+      <AppPicker
+        title="title"
+        isRequired
+        header="Select address"
+        data={[
+          {
+            id: 1,
+            content: 'Key necessary',
+          },
+          {
+            id: 2,
+            content: 'Advertisement unwanted',
+          },
+          {
+            id: 3,
+            content: 'House of main street',
+          },
+          {
+            id: 4,
+            content: 'Main drop off point within the house',
+          },
+          {
+            id: 5,
+            content: 'Further hinderings',
+          },
+        ]}
+        onSelect={setSelect}
+        selected={select}
+      />
+      <AppButton text="Button" />
       {/* <AppAccordion /> */}
     </ScrollView>
   );

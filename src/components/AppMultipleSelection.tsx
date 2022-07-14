@@ -16,15 +16,28 @@ import { Colors, FontSize, Spacing } from '@theme';
  * - Selected is also default data
  */
 export const AppMultipleSelection = React.memo((props: any) => {
-  const { style, data = [], selected = [], onSelect } = props;
+  const {
+    style,
+    data = [],
+    selected = [],
+    onSelect,
+    isRequired,
+    title,
+    error,
+  } = props;
 
   const dataRef = useRef<any>(selected);
 
   return (
     <View style={[styles.container, style]}>
-      {data.map((item: any) => {
+      <Text style={styles.textTitle}>
+        {isRequired && <Text style={styles.isRequired}>* </Text>}
+        {title}
+      </Text>
+      {data.map((item: any, index) => {
         return (
           <TouchableOpacity
+            key={index}
             onPress={() => {
               if (dataRef.current.includes(item.id)) {
                 const filteredData = dataRef.current.filter((id: any) => {
@@ -42,6 +55,7 @@ export const AppMultipleSelection = React.memo((props: any) => {
           </TouchableOpacity>
         );
       })}
+      {!!error && <Text style={styles.error}>{error}</Text>}
     </View>
   );
 });
@@ -51,6 +65,11 @@ const styles = StyleSheet.create({
     // marginTop: Spacing.height18,
     width: '100%',
   },
+  textTitle: {
+    fontWeight: '700',
+    fontSize: 15,
+    marginBottom: 10,
+  },
   radioBox: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -59,12 +78,20 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 8,
     borderRadius: 4,
-    marginTop: 15,
+    marginBottom: 15,
   },
   text: {
     fontSize: 15,
     fontWeight: '400',
     color: '#333333',
     marginLeft: 10,
+  },
+  error: {
+    fontSize: 14,
+    color: '#DA202A',
+    fontWeight: '400',
+  },
+  isRequired: {
+    color: '#FF5757',
   },
 });
