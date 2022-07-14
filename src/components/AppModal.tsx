@@ -1,15 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
-  TextInput,
   StyleSheet,
-  Keyboard,
+  Modal as RNModal,
   TouchableOpacity,
-  Text,
 } from 'react-native';
-import { ActiveRadioIcon, CrossIcon, RadioIcon, TickIcon } from '@assets';
-import { Colors, FontSize, Spacing } from '@theme';
-import { Button, Card, Layout, Modal } from '@ui-kitten/components';
+
+import { Modal } from '@ui-kitten/components';
 
 export const AppModal = (props: any) => {
   const {
@@ -42,6 +39,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 8,
     backgroundColor: '#FFFFFF',
+    maxHeight: 336,
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

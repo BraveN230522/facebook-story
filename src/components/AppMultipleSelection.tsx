@@ -1,14 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+
 import {
-  View,
-  TextInput,
-  StyleSheet,
-  Keyboard,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
-import { ActiveRadioIcon, RadioIcon } from '@assets';
-import { Colors, FontSize, Spacing } from '@theme';
+  ActiveCheckIcon,
+  ActiveRadioIcon,
+  CheckIcon,
+  RadioIcon,
+} from '@assets';
 
 /**
  * - Data must be object and include ID and CONTENT
@@ -50,7 +48,7 @@ export const AppMultipleSelection = React.memo((props: any) => {
             }}
             style={styles.radioBox}
             activeOpacity={0.7}>
-            {selected.includes(item.id) ? <ActiveRadioIcon /> : <RadioIcon />}
+            {selected.includes(item.id) ? <ActiveCheckIcon /> : <CheckIcon />}
             <Text style={styles.text}>{item.content}</Text>
           </TouchableOpacity>
         );
@@ -62,7 +60,6 @@ export const AppMultipleSelection = React.memo((props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: Spacing.height18,
     width: '100%',
   },
   textTitle: {

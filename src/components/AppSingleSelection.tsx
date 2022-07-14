@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Keyboard,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import React from 'react';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+
 import { ActiveRadioIcon, RadioIcon } from '@assets';
-import { Colors, FontSize, Spacing } from '@theme';
 
 /**
  * - Data must be object and include ID and CONTENT
@@ -24,22 +17,34 @@ export const AppSingleSelection = React.memo((props: any) => {
     isRequired,
     title,
     error,
+    isRadio = true,
   } = props;
 
   return (
     <View style={[styles.container, style]}>
-      <Text style={styles.textTitle}>
-        {isRequired && <Text style={styles.isRequired}>* </Text>}
-        {title}
-      </Text>
+      {!!title && (
+        <Text style={styles.textTitle}>
+          {isRequired && <Text style={styles.isRequired}>* </Text>}
+          {title}
+        </Text>
+      )}
       {data.map((item: any, index) => {
         return (
           <TouchableOpacity
+            onLayout={event => {
+              var { x, y, width, height } = event.nativeEvent.layout;
+              console.log(height);
+            }}
             key={index}
             onPress={() => onSelect(item.id)}
-            style={styles.radioBox}
+            style={[
+              styles.radioBox,
+              selected === item.id && !isRadio && styles.active,
+            ]}
             activeOpacity={0.7}>
-            {selected === item.id ? <ActiveRadioIcon /> : <RadioIcon />}
+            {isRadio && (
+              <>{selected === item.id ? <ActiveRadioIcon /> : <RadioIcon />}</>
+            )}
             <Text style={styles.text}>{item.content}</Text>
           </TouchableOpacity>
         );
@@ -51,8 +56,8 @@ export const AppSingleSelection = React.memo((props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: Spacing.height18,
     width: '100%',
+    paddingTop: 15,
   },
   textTitle: {
     fontWeight: '700',
@@ -74,9 +79,13 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
+    // lineHeight: 20,
     fontWeight: '400',
     color: '#333333',
     marginLeft: 10,
+  },
+  active: {
+    backgroundColor: '#D5D5D5',
   },
   error: {
     marginTop: 7,

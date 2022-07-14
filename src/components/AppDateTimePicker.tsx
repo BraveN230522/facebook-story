@@ -9,7 +9,6 @@ import {
   ViewStyle,
 } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import IIcons from 'react-native-vector-icons/Ionicons';
 
 const slideDown = {
   from: {

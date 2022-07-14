@@ -1,15 +1,15 @@
-import { CalendarIcon, ChevronPickerIcon, ClockIcon } from '@assets';
-import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import { ChevronPickerIcon } from '@assets';
+import React, { useEffect, useRef, useState } from 'react';
 import {
+  Alert,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  ViewStyle,
+  Modal,
 } from 'react-native';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import IIcons from 'react-native-vector-icons/Ionicons';
+
 import { AppModal } from '@components/AppModal';
 import { AppSingleSelection } from '@components/AppSingleSelection';
 
@@ -23,6 +23,20 @@ export const AppPicker = (props: any) => {
     props;
   const [visible, setVisible] = useState(false);
 
+  let scrollViewRef = useRef<ScrollView>(null);
+
+  useEffect(() => {
+    if (!scrollViewRef.current || !visible) return;
+
+    setTimeout(() => {
+      scrollViewRef.current?.scrollTo({
+        x: 0,
+        y: findIndex(selected) * 59 + 15 - 275.3333435058594 / 2 + 15 - 22,
+        animated: true,
+      });
+    });
+  }, [visible]);
+
   useEffect(() => {
     handleBackdropPress();
   }, [selected]);
@@ -35,7 +49,7 @@ export const AppPicker = (props: any) => {
     setVisible(false);
   };
 
-  const handleFindIndex = id => {
+  const findIndex = id => {
     return data.findIndex(i => i.id === id);
   };
 
@@ -53,27 +67,33 @@ export const AppPicker = (props: any) => {
           {/* {mode === 'date' ? <CalendarIcon /> : <ClockIcon />} */}
           <Text
             style={[styles.textSelect, selected ? styles.textAfterSelect : {}]}>
-            {selected
-              ? data[handleFindIndex(selected)]?.content
-              : `Select an option`}
+            {selected ? data[findIndex(selected)]?.content : `Select an option`}
           </Text>
           <ChevronPickerIcon />
         </TouchableOpacity>
         {!!error && <Text style={styles.error}>{error}</Text>}
       </View>
       <AppModal visible={visible} onBackdropPress={handleBackdropPress}>
-        {!!header && (
+        {/* {!!header && (
           <View style={styles.header}>
             <Text style={styles.headerTxt}>{header}</Text>
           </View>
-        )}
-        <View style={styles.modalContent}>
+        )} */}
+        <ScrollView
+          ref={_ref => {
+            if (_ref) {
+              scrollViewRef.current = _ref;
+            }
+          }}
+          onContentSizeChange={h => console.log(h)}
+          style={styles.modalContent}>
           <AppSingleSelection
             selected={selected}
             data={data}
             onSelect={onSelect}
+            isRadio={false}
           />
-        </View>
+        </ScrollView>
       </AppModal>
     </>
   );

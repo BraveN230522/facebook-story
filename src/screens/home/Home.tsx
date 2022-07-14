@@ -20,7 +20,8 @@ import { AppButton } from '@components/AppButton';
 export const Home = (props: any) => {
   const { handleCreateStory } = useLogic(props);
 
-  const [select, setSelect] = useState(1);
+  const [select, setSelect] = useState([0]);
+  const [select2, setSelect2] = useState(0);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -52,8 +53,9 @@ export const Home = (props: any) => {
         // PostIcon={MailIcon}
         error="sai email roi"
         label="Username"
+        isPassword
         isRequired
-        multiline
+        // multiline
         // inputStyle={{ minHeight: '30%' }}
       /> */}
       {/* <AppMultipleSelection
@@ -86,7 +88,7 @@ export const Home = (props: any) => {
         isRequired
       /> */}
       {/* <AppSingleSelection
-        selected={select}
+        selected={select2}
         data={[
           {
             id: 1,
@@ -109,7 +111,7 @@ export const Home = (props: any) => {
             content: 'Further hinderings',
           },
         ]}
-        onSelect={setSelect}
+        onSelect={setSelect2}
         title="day la title"
         error="loi roi"
         isRequired
@@ -154,11 +156,55 @@ export const Home = (props: any) => {
             id: 5,
             content: 'Further hinderings',
           },
+          {
+            id: 6,
+            content: 'Further hinderings',
+          },
+          {
+            id: 7,
+            content: 'Further hinderings',
+          },
+          {
+            id: 8,
+            content: 'Further hinderings',
+          },
+          {
+            id: 9,
+            content: 'Further hinderings',
+          },
+          {
+            id: 10,
+            content: 'Further hinderings',
+          },
+          {
+            id: 11,
+            content: 'Further hinderings',
+          },
+          {
+            id: 12,
+            content: 'Further hinderings',
+          },
+          {
+            id: 13,
+            content: 'Further hinderings',
+          },
+          {
+            id: 14,
+            content: 'Further hinderings',
+          },
+          {
+            id: 15,
+            content: 'Further hinderings',
+          },
+          {
+            id: 16,
+            content: 'Further hinderings',
+          },
         ]}
         onSelect={setSelect}
         selected={select}
       />
-      <AppButton text="Button" />
+      {/* <AppButton text="Button" disabled /> */}
       {/* <AppAccordion /> */}
     </ScrollView>
   );

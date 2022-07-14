@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export const AppButton = React.memo(
   ({
@@ -18,7 +11,7 @@ export const AppButton = React.memo(
     ...TouchableOpacityProps
   }: any) => {
     return (
-      <View style={[disabled ? styles.disabled : {}, styles.container, style]}>
+      <View style={[styles.container, disabled ? styles.disabled : {}, style]}>
         <TouchableOpacity
           onPress={onPress}
           activeOpacity={0.5}
@@ -47,10 +40,10 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#F5F5F5',
-    fontWeight: '700',
-    fontSize: 15,
+    fontWeight: '400',
+    fontSize: 16,
   },
   disabled: {
-    opacity: 0.5,
+    backgroundColor: '#C1C6C8',
   },
 });

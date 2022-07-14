@@ -1,17 +1,18 @@
-import { Colors, FontSize, Spacing } from '@theme';
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   TextInput,
   StyleSheet,
   Keyboard,
-  TouchableOpacity,
   Text,
+  TouchableOpacity,
 } from 'react-native';
+
+import { FontSize } from '@theme';
+import { EyeActiveIcon, EyeInactiveIcon } from '@assets';
 
 export const AppInput = React.memo((props: any) => {
   const {
-    secureTextEntry,
     placeholder,
     multiline,
     keyboardType,
@@ -29,7 +30,11 @@ export const AppInput = React.memo((props: any) => {
     label,
     isRequired,
     inputStyle,
+    isPassword,
   } = props;
+
+  const ref = useRef<any>();
+  const [secureTextEntry, setSecureTextEntry] = useState(isPassword);
 
   return (
     <View style={[styles.container, style]}>
@@ -45,6 +50,7 @@ export const AppInput = React.memo((props: any) => {
           </View>
         )}
         <TextInput
+          ref={ref}
           style={[styles.input, multiline ? styles.multiline : {}, inputStyle]}
           returnKeyType={returnKeyType || (multiline ? undefined : 'done')}
           keyboardType={keyboardType}
@@ -65,6 +71,13 @@ export const AppInput = React.memo((props: any) => {
             <PostIcon />
           </View>
         )}
+        {isPassword && (
+          <TouchableOpacity
+            onPress={() => setSecureTextEntry(prev => !prev)}
+            style={{ marginRight: 12 }}>
+            {secureTextEntry ? <EyeInactiveIcon /> : <EyeActiveIcon />}
+          </TouchableOpacity>
+        )}
       </View>
       {!!error && <Text style={styles.error}>{error}</Text>}
     </View>
@@ -72,9 +85,7 @@ export const AppInput = React.memo((props: any) => {
 });
 
 const styles = StyleSheet.create({
-  container: {
-    // marginTop: Spacing.height18,
-  },
+  container: {},
 
   boxInput: {
     flexDirection: 'row',
